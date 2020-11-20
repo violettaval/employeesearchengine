@@ -8,19 +8,24 @@ import API from "../utils/API";
 
 class EmployeeContainer extends Component {
   state = {
-    employees: [],
-    search: ""
+    search: "",
+    employees: []
   };
 
+  // When this component mounts, search for the movie "The Matrix"
   componentDidMount() {
-    API.search().then((res) => {this.setState({ employees: res.data.user })})
-      .catch(err => console.log(err));
-      console.log(this.state.employees);
+    API.getEmployee()
+      .then((res) => {
+        this.setState({
+          employees: res.data.results
+        });
+      })
+      .catch((err) => console.error());
   }
-  
+
   handleInputChange = event => {
-    const value = event.target.value;
-    const name = event.target.name;
+    let value = event.target.value;
+    let name = event.target.name;
     this.setState({
       [name]: value
     });
@@ -30,6 +35,15 @@ class EmployeeContainer extends Component {
     return (
       <>
       <Container>
+         <Row id="top">
+          <Col size="md-4">
+            </Col>
+            <Col size="md-4">
+            <h1 id="header">Employee Tracker</h1>
+            </Col>
+            <Col size="md-4">
+            </Col>
+          </Row>
       <Row>
         <SearchForm
           value={this.state.search}
@@ -54,14 +68,14 @@ class EmployeeContainer extends Component {
         </Row>
         {/* <List employees={this.state.employees} search={this.state.search}/> */}
           {this.state.employees
-            .filter(user => (
-              user.name.toLowerCase().includes(this.state.search.toLowerCase())
-              ||
-              user.email.toLowerCase().includes(this.state.search.toLowerCase())
-              ||
-              user.phone.includes(this.state.search)
-            )
-            )
+//             .filter(user => (
+//               user.name.toLowerCase().includes(this.state.search.toLowerCase())
+//               ||
+//               user.email.toLowerCase().includes(this.state.search.toLowerCase())
+//               ||
+//               user.phone.includes(this.state.search)
+//             )
+//             )
             .map((user, i) => {
               return (
                 <Row>

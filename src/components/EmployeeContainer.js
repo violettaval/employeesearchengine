@@ -11,7 +11,6 @@ class EmployeeContainer extends Component {
   state = {
     search: "",
     employees: []
-
   };
 
   componentDidMount() {
@@ -31,7 +30,22 @@ class EmployeeContainer extends Component {
       [name]: value
     });
   };
-
+  
+  handleFormSubmit = event => {
+    event.preventDefault();
+    const sorted = this.state.employees
+      .filter(results => (
+        results.name.toLowerCase().includes(this.state.search.toLowerCase())
+        ||
+        results.email.toLowerCase().includes(this.state.search.toLowerCase())
+        ||
+        results.phone.includes(this.state.search)
+      ));
+    this.setState({
+      employees: sorted
+    });
+  }
+  
   render() {
     return (
       <>
@@ -40,7 +54,7 @@ class EmployeeContainer extends Component {
           <Col size="md-4">
             </Col>
             <Col size="md-4">
-            <h1 id="header">Employee Tracker</h1>
+            <h1 id="header">Employee Search Engine</h1>
             </Col>
             <Col size="md-4">
             </Col>
@@ -49,18 +63,19 @@ class EmployeeContainer extends Component {
             <SearchForm
               value={this.state.search}
               handleInputChange={this.handleInputChange}
+              handleFormSubmit={this.handleFormSubmit}
             />
           </Row>
           <Row>
             <Col size="md-1">
             </Col>
-            <Col size="md-2"><h2>Image</h2>
+            <Col size="md-1"><h2>Image</h2>
             </Col>
             <Col size="md-2"><h2>Name</h2>
             </Col>
             <Col size="md-2"><h2>Phone</h2>
             </Col>
-            <Col size="md-2"><h2>Email</h2>
+            <Col size="md-3"><h2>Email</h2>
             </Col>
             <Col size="md-2"><h2>DOB</h2>
             </Col>
@@ -82,13 +97,13 @@ class EmployeeContainer extends Component {
                 <Row>
                   <Col size="md-1" key={i}>
                   </Col>
-                  <Col size="md-2"><img src={results.picture.thumbnail} alt="thumbnail"></img>
+                  <Col size="md-1"><img src={results.picture.thumbnail} alt="thumbnail"></img>
                   </Col>
-                  <Col size="md-2">{results.name.first}{results.name.last}
+                  <Col size="md-2">{results.name.first} {results.name.last}
                   </Col>
                   <Col size="md-2">{results.phone}
                   </Col>
-                  <Col size="md-2">{results.email}
+                  <Col size="md-3">{results.email}
                   </Col>
                   <Col size="md-2">{results.phone}
                   </Col>
@@ -102,7 +117,4 @@ class EmployeeContainer extends Component {
     );
   };
 }
-
-export default EmployeeContainer;
-
 export default EmployeeContainer;

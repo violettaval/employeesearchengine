@@ -13,7 +13,6 @@ class EmployeeContainer extends Component {
     employees: []
   };
 
-  // When this component mounts, search for the movie "The Matrix"
   componentDidMount() {
     API.getEmployee()
       .then((res) => {
@@ -40,7 +39,7 @@ class EmployeeContainer extends Component {
           <Col size="md-4">
             </Col>
             <Col size="md-4">
-            <h1 id="header">Employee Tracker</h1>
+            <h1 id="header">Employee Search Engine</h1>
             </Col>
             <Col size="md-4">
             </Col>

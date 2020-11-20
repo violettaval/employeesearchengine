@@ -4,13 +4,14 @@ import Row from "./Row";
 import Col from "./Col";
 import SearchForm from "./SearchForm";
 import API from "../utils/API";
-import "./style.css";
+import "../style.css";
 // import List from "./components/List";
 
 class EmployeeContainer extends Component {
   state = {
     search: "",
     employees: []
+
   };
 
   componentDidMount() {
@@ -34,72 +35,74 @@ class EmployeeContainer extends Component {
   render() {
     return (
       <>
-      <Container>
-         <Row id="top">
+        <Container>
+          <Row id="top">
           <Col size="md-4">
             </Col>
             <Col size="md-4">
-            <h1 id="header">Employee Search Engine</h1>
+            <h1 id="header">Employee Tracker</h1>
             </Col>
             <Col size="md-4">
             </Col>
           </Row>
-      <Row>
-        <SearchForm
-          value={this.state.search}
-          handleInputChange={this.handleInputChange}
-        />
-      </Row>
-        <Row>
-          <Col size="md-1">
-          </Col>
-          <Col size="md-2"><h2>Image</h2>
-          </Col>
-          <Col size="md-2"><h2>Name</h2>
-          </Col>
-          <Col size="md-2"><h2>Phone</h2>
-          </Col>
-          <Col size="md-2"><h2>Email</h2>
-          </Col>
-          <Col size="md-2"><h2>DOB</h2>
-          </Col>
-          <Col size="md-1">
-          </Col>
-        </Row>
-        {/* <List employees={this.state.employees} search={this.state.search}/> */}
+          <Row>
+            <SearchForm
+              value={this.state.search}
+              handleInputChange={this.handleInputChange}
+            />
+          </Row>
+          <Row>
+            <Col size="md-1">
+            </Col>
+            <Col size="md-2"><h2>Image</h2>
+            </Col>
+            <Col size="md-2"><h2>Name</h2>
+            </Col>
+            <Col size="md-2"><h2>Phone</h2>
+            </Col>
+            <Col size="md-2"><h2>Email</h2>
+            </Col>
+            <Col size="md-2"><h2>DOB</h2>
+            </Col>
+            <Col size="md-1">
+            </Col>
+          </Row>
+          {/* <List employees={this.state.employees} search={this.state.search}/> */}
           {this.state.employees
-//             .filter(user => (
-//               user.name.toLowerCase().includes(this.state.search.toLowerCase())
-//               ||
-//               user.email.toLowerCase().includes(this.state.search.toLowerCase())
-//               ||
-//               user.phone.includes(this.state.search)
-//             )
-//             )
-            .map((user, i) => {
+            // .filter(results => (
+            //   results.name.toLowerCase().includes(this.state.search.toLowerCase())
+            //   ||
+            //   results.email.toLowerCase().includes(this.state.search.toLowerCase())
+            //   ||
+            //   results.phone.includes(this.state.search)
+            // )
+            // )
+            .map((results, i) => {
               return (
                 <Row>
                   <Col size="md-1" key={i}>
                   </Col>
-                  <Col size="md-2"><img src={user.picture.thumbnail} alt="thumbnail"></img>
+                  <Col size="md-2"><img src={results.picture.thumbnail} alt="thumbnail"></img>
                   </Col>
-                  <Col size="md-2">{user.name.first}{user.name.last}
+                  <Col size="md-2">{results.name.first}{results.name.last}
                   </Col>
-                  <Col size="md-2">{user.phone}
+                  <Col size="md-2">{results.phone}
                   </Col>
-                  <Col size="md-2">{user.email}
+                  <Col size="md-2">{results.email}
                   </Col>
-                  <Col size="md-2">{user.phone}
+                  <Col size="md-2">{results.phone}
                   </Col>
                   <Col size="md-1">
                   </Col>
                 </Row>
               );
             })}
-      </Container>
+        </Container>
       </>
     );
   };
 }
+
+export default EmployeeContainer;
 
 export default EmployeeContainer;

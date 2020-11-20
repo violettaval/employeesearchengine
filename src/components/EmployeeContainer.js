@@ -4,7 +4,7 @@ import Row from "./Row";
 import Col from "./Col";
 import SearchForm from "./SearchForm";
 import API from "../utils/API";
-import "../style.css";
+import "./style.css";
 // import List from "./components/List";
 
 class EmployeeContainer extends Component {
